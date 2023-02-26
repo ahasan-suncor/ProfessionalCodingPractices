@@ -2,6 +2,8 @@
  * Created: Wed Feb 15 2023 
  * Description: Update the web page based on the checklist and categories selected.
  * Notes: 0. I am amazing annnnd hakuna matata!
+          1. The key in checklistCategoryItems JSON needs to match the checkbox element ID tag in the HTML.
+             This is so the correct list can be displayed based on what's selected.
  */
 
 const categoryFilters = document.querySelectorAll('.filter');
@@ -11,11 +13,10 @@ const progressBar = document.querySelector('.progress');
 const progressText = document.querySelector('#progress-text');
 const resetButton = document.querySelector('#reset-button');
 
+// Remember the checklist items that have been checked.
 let checkedItems = {};
 
-// The key in this JSON needs to match the checkbox element ID tag in the HTML.
-// This is so the correct list can be displayed based on what's selected.
-let checklistCategoryItems;
+let checklistCategoryItems = {};
 
 // Use the fetch API and async/await to retrieve the checklist items from an external file.
 // This is to ensure the data is fully loaded before executing the rest of the code.
@@ -55,7 +56,7 @@ function createChecklistOnPage() {
     checklist.innerHTML = generateChecklistItems(selectedCategories);
     checklistContainer.style.display = 'block';
 
-    updateChecklistProgress();
+    updateChecklistProgressOnPage();
 }
 
 // Retrieves all selected category filters from the UI and returns them as an array.
@@ -107,7 +108,9 @@ function generateChecklistItemHTML(categoryChecklist, categoryName) {
                                      <label>
                                         <input type="checkbox" ${itemAttribute}
                                           onchange="updateCheckedItem('${categoryName}', '${item}'); 
-                                                    updateItemCompletionStatus(this);">
+                                                    updateChecklistProgressOnPage();
+                                                    updateChecklistItemsStyle(this);
+                                                    ">
                                          ${item}
                                      </label>
                                  </li>
@@ -119,7 +122,6 @@ function generateChecklistItemHTML(categoryChecklist, categoryName) {
 }
 
 // Called whenever a checklist checkbox is clicked: either persists the checked item's state or removes it.
-// And then updates the progress section on the page.
 function updateCheckedItem(categoryName, checklistItem) {
     const categoryItemsChecked = checkedItems[categoryName] || [];
     const itemIndex = categoryItemsChecked.indexOf(checklistItem);
@@ -132,11 +134,10 @@ function updateCheckedItem(categoryName, checklistItem) {
     }
 
     checkedItems[categoryName] = categoryItemsChecked;
-    updateChecklistProgress();
 }
 
 // Updates the progress bar and progress text based on the current state of the items.
-function updateChecklistProgress() {
+function updateChecklistProgressOnPage() {
     const filters = getSelectedCategories();
     let totalNumOfChecklistItems = 0;
     let numOfCompletedItems = 0;
@@ -153,7 +154,7 @@ function updateChecklistProgress() {
 }
 
 // Based on the state of the checkbox, add/remove 'completed' css class.
-function updateItemCompletionStatus(checkboxElement) {
+function updateChecklistItemsStyle(checkboxElement) {
     if (checkboxElement.checked) {
         checkboxElement.parentNode.classList.add('completed');
     } else {
