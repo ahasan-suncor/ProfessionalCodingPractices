@@ -30,17 +30,6 @@ async function loadChecklistCategoryItems() {
     }
 }
 
-// Retrieves all selected category filters from the UI and returns them as an array.
-function getSelectedCategories() {
-    const selectedCategories = [];
-    categoryFilters.forEach(checkbox => {
-        if (checkbox.checked) {
-            selectedCategories.push(checkbox.id);
-        }
-    });
-    return selectedCategories;
-}
-
 function clearCheckedItems() {
     checkedItems = {};
 }
@@ -49,24 +38,7 @@ function clearProgressText() {
     progressText.innerText = '';
 }
 
-// Called whenever a checklist checkbox is clicked, either removes the checked item or adds it.
-function updateCheckedItem(categoryName, checklistItem) {
-    const categoryItemsChecked = checkedItems[categoryName] || [];
-    const itemIndex = categoryItemsChecked.indexOf(checklistItem);
-    const itemExists = itemIndex !== -1;
-
-    if (itemExists) {
-        categoryItemsChecked.splice(itemIndex, 1);
-    } else {
-        categoryItemsChecked.push(checklistItem);
-    }
-
-    checkedItems[categoryName] = categoryItemsChecked;
-    updateChecklistProgress();
-}
-
 // Updates the UI with the latest selected category checklist.
-// If a new category checklist is added, the state of the old ones remain the same.
 function createChecklistOnPage() {
     const selectedCategories = getSelectedCategories();
 
@@ -78,7 +50,7 @@ function createChecklistOnPage() {
         return;
     }
 
-    clearUnselectedChecklist(selectedCategories);
+    clearUnselectedCategoryChecklist(selectedCategories);
 
     checklist.innerHTML = generateChecklistItems(selectedCategories);
     checklistContainer.style.display = 'block';
@@ -86,8 +58,19 @@ function createChecklistOnPage() {
     updateChecklistProgress();
 }
 
+// Retrieves all selected category filters from the UI and returns them as an array.
+function getSelectedCategories() {
+    const selectedCategories = [];
+    categoryFilters.forEach(checkbox => {
+        if (checkbox.checked) {
+            selectedCategories.push(checkbox.id);
+        }
+    });
+    return selectedCategories;
+}
+
 // For every category filter, if it's not selected, and it had items checked in its list, then clear it.
-function clearUnselectedChecklist(selectedCategories) {
+function clearUnselectedCategoryChecklist(selectedCategories) {
     for (const categoryFilterName in checklistCategoryItems) {
         const categoryChecklist = checklistCategoryItems[categoryFilterName];
         if (!selectedCategories.includes(categoryFilterName)) {
@@ -135,6 +118,23 @@ function generateChecklistItemHTML(categoryChecklist, categoryName) {
     return checklistItems;
 }
 
+// Called whenever a checklist checkbox is clicked: either persists the checked item's state or removes it.
+// And then updates the progress section on the page.
+function updateCheckedItem(categoryName, checklistItem) {
+    const categoryItemsChecked = checkedItems[categoryName] || [];
+    const itemIndex = categoryItemsChecked.indexOf(checklistItem);
+    const itemExists = itemIndex !== -1;
+
+    if (itemExists) {
+        categoryItemsChecked.splice(itemIndex, 1);
+    } else {
+        categoryItemsChecked.push(checklistItem);
+    }
+
+    checkedItems[categoryName] = categoryItemsChecked;
+    updateChecklistProgress();
+}
+
 // Updates the progress bar and progress text based on the current state of the items.
 function updateChecklistProgress() {
     const filters = getSelectedCategories();
@@ -152,7 +152,7 @@ function updateChecklistProgress() {
     progressText.innerText = percentComplete + '% Complete';
 }
 
-// Based on the state of the checkbox add/remove 'completed' css class.
+// Based on the state of the checkbox, add/remove 'completed' css class.
 function updateItemCompletionStatus(checkboxElement) {
     if (checkboxElement.checked) {
         checkboxElement.parentNode.classList.add('completed');
@@ -162,6 +162,7 @@ function updateItemCompletionStatus(checkboxElement) {
 }
 
 // Adds an event listener to the reset button to clear the checked items and update the UI when clicked.
+// Note: The reset button only clears the checklist and not the category filters.
 function addResetButtonEventListener() {
     resetButton.addEventListener('click', function () {
         clearCheckedItems();
