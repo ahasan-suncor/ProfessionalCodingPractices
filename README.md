@@ -12,6 +12,6 @@ To run this code, you need a local HTTP server. You can use Node.js and the http
 1. Clone this repository to your local machine using git clone
 2. Install Node.js on your machine from the Node.js website: https://nodejs.org/en/download/
 3. Once Node.js is installed, open your terminal/command prompt and run the following command to install http-server globally: `npm install http-server -global`
-4. Navigate to the directory where the project files are located using the command your terminal/command prompt
+4. Navigate to the directory where the project files are located using your terminal/command prompt
 5. Start the HTTP server by running the following command: `http-server`
 6. This will start the server and display the URL where your app is running. Open your web browser and navigate to the URL to view the app
