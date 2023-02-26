@@ -11,15 +11,14 @@ const progressBar = document.querySelector('.progress');
 const progressText = document.querySelector('#progress-text');
 const resetButton = document.querySelector('#reset-button');
 
+let checkedItems = {};
+
 // The key in this JSON needs to match the checkbox element ID tag in the HTML.
 // This is so the correct list can be displayed based on what's selected.
-const checklistCategoryItems = {
-    filter1: ['Ahmed is amazing', 'Hakuna'],
-    filter2: ['Matata', 'what is happening'],
-    filter3: ['mind=lost', 'ahmed is still amazing']
-};
-
-let = {};
+let checklistCategoryItems;
+fetch('checkListItems.json')
+  .then(response => response.json())
+  .then(data => {checklistCategoryItems = data})
 
 // Retrieves all selected category filters from the UI and returns them as an array.
 function getSelectedCategories() {
@@ -56,7 +55,7 @@ function updateCheckedItem(categoryName, checklistItem) {
     updateChecklistProgress();
 }
 
-// Updates the progress bar and progress text based on the current state of the selected category and checked items.
+// Updates the progress bar and progress text based on the current state of the items.
 function updateChecklistProgress() {
     const filters = getSelectedCategories();
     let totalNumOfChecklistItems = 0;
@@ -138,7 +137,10 @@ function generateChecklistItemHTML(categoryChecklist, categoryName) {
         const itemAttribute = isItemChecked ? 'checked' : '';
 
         let checklistItemHTML = `<li class="${itemClass}">
-                                     <label> <input type="checkbox" ${itemAttribute} onchange="updateCheckedItem('${categoryName}', '${item}'); updateItemCompletionStatus(this);">
+                                     <label>
+                                        <input type="checkbox" ${itemAttribute}
+                                          onchange="updateCheckedItem('${categoryName}', '${item}'); 
+                                                    updateItemCompletionStatus(this);">
                                          ${item}
                                      </label>
                                  </li>
