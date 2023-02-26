@@ -16,9 +16,19 @@ let checkedItems = {};
 // The key in this JSON needs to match the checkbox element ID tag in the HTML.
 // This is so the correct list can be displayed based on what's selected.
 let checklistCategoryItems;
-fetch('checkListItems.json')
-  .then(response => response.json())
-  .then(data => {checklistCategoryItems = data})
+
+// Use the fetch API and async/await to retrieve the checklist items from an external file.
+// This is to ensure the data is fully loaded before executing the rest of the code.
+async function loadChecklistCategoryItems() {
+    try {
+        const response = await fetch('checkListItems.json');
+        const data = await response.json();
+        checklistCategoryItems = data;
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 // Retrieves all selected category filters from the UI and returns them as an array.
 function getSelectedCategories() {
@@ -55,31 +65,6 @@ function updateCheckedItem(categoryName, checklistItem) {
     updateChecklistProgress();
 }
 
-// Updates the progress bar and progress text based on the current state of the items.
-function updateChecklistProgress() {
-    const filters = getSelectedCategories();
-    let totalNumOfChecklistItems = 0;
-    let numOfCompletedItems = 0;
-    for (const filter of filters) {
-        if (checklistCategoryItems[filter]) {
-            totalNumOfChecklistItems += checklistCategoryItems[filter].length;
-            numOfCompletedItems += checkedItems[filter] ? checkedItems[filter].length : 0;
-        }
-    }
-    const percentComplete = Math.round((numOfCompletedItems / totalNumOfChecklistItems) * 100);
-    progressBar.style.width = percentComplete + '%';
-    progressText.innerText = percentComplete + '% Complete';
-}
-
-// Based on the state of the checkbox add/remove 'completed' css class.
-function updateItemCompletionStatus(checkboxElement) {
-    if (checkboxElement.checked) {
-        checkboxElement.parentNode.classList.add('completed');
-    } else {
-        checkboxElement.parentNode.classList.remove('completed');
-    }
-}
-
 // Updates the UI with the latest selected category checklist.
 // If a new category checklist is added, the state of the old ones remain the same.
 function createChecklistOnPage() {
@@ -95,14 +80,13 @@ function createChecklistOnPage() {
 
     clearUnselectedChecklist(selectedCategories);
 
-    let checklistItemsHTML = generateChecklistItems(selectedCategories);
-    checklist.innerHTML = checklistItemsHTML;
+    checklist.innerHTML = generateChecklistItems(selectedCategories);
     checklistContainer.style.display = 'block';
 
     updateChecklistProgress();
 }
 
-// For every category filter, if its not selected and it had items checked in its list, then clear it.
+// For every category filter, if it's not selected, and it had items checked in its list, then clear it.
 function clearUnselectedChecklist(selectedCategories) {
     for (const categoryFilterName in checklistCategoryItems) {
         const categoryChecklist = checklistCategoryItems[categoryFilterName];
@@ -151,6 +135,32 @@ function generateChecklistItemHTML(categoryChecklist, categoryName) {
     return checklistItems;
 }
 
+// Updates the progress bar and progress text based on the current state of the items.
+function updateChecklistProgress() {
+    const filters = getSelectedCategories();
+    let totalNumOfChecklistItems = 0;
+    let numOfCompletedItems = 0;
+
+    for (const filter of filters) {
+        if (checklistCategoryItems[filter]) {
+            totalNumOfChecklistItems += checklistCategoryItems[filter].length;
+            numOfCompletedItems += checkedItems[filter] ? checkedItems[filter].length : 0;
+        }
+    }
+    const percentComplete = Math.round((numOfCompletedItems / totalNumOfChecklistItems) * 100);
+    progressBar.style.width = percentComplete + '%';
+    progressText.innerText = percentComplete + '% Complete';
+}
+
+// Based on the state of the checkbox add/remove 'completed' css class.
+function updateItemCompletionStatus(checkboxElement) {
+    if (checkboxElement.checked) {
+        checkboxElement.parentNode.classList.add('completed');
+    } else {
+        checkboxElement.parentNode.classList.remove('completed');
+    }
+}
+
 // Adds an event listener to the reset button to clear the checked items and update the UI when clicked.
 function addResetButtonEventListener() {
     resetButton.addEventListener('click', function () {
@@ -173,4 +183,8 @@ function initializeApp() {
     createChecklistOnPage();
 }
 
-initializeApp();
+// The program waits till the list is loaded before initializing the app.
+loadChecklistCategoryItems()
+    .then(() => {
+        initializeApp();
+    });
