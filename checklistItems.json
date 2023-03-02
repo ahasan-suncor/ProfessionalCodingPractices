@@ -6,9 +6,10 @@
         "The names (variables, columns, etc.) are meaningful, descriptive, and clearly express the intent.",
         "The hard coded values are replaced with named constants.",
         "There is no ambiguity or confusion with any parts of the code.",
-        "The code is broken up into smaller, manageable, and easier to understand pieces (functions/classes).",
+        "The code is broken up into smaller, reusable, manageable, and easier to understand pieces (functions/classes).",
         "There is no code duplication. Functionality that already exist is being reused.",
         "Each of the functions/methods have a clear and single responsibility.",
+        "Each function contains a docstring that highlight the use of the function with required inputs and outputs",
         "Comments are properly utilized, and redundant/outdated comments are removed.",
         "Commented-out code or dead code is removed.",
         "Code is tested to make sure it works as expected."
