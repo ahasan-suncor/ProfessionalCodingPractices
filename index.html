@@ -1,83 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <title>Code Quality Checklist</title>
+    <title>Checklist Filters</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Code Quality Checklist</h1>
-    <div class="progress-container">
-        <div class="progress-bar">
-            <div class="progress"></div>
-        </div>
-        <span id="progress-text">0% Complete</span>
-        <button id="reset-button">Reset</button>
+    <h1>Review Checklist</h1>
+    <h3>Choose categories you want to see:</h3>
+    <div id="filter-container">
+        <label><input checked type="checkbox" class="filter" id="clean-code">Clean & Readable Code</label>
     </div>
-    <ul>
-        <li>
-            <label>
-                <input type="checkbox"> The code is consistent (names, writing style, etc.) within the source code file.
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox"> The code will be consistent with the rest of the codebase if it’s merged.
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox"> The code has proper formatting to make it look neat and organized (white space).
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox"> The names (variables, columns, etc.) are meaningful, descriptive, and clearly express the intent.
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox"> The hard coded values are replaced with named constants.
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox"> There is no ambiguity or confusion with any parts of the code.
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox"> The code is broken up into smaller, manageable, and easier to understand pieces (functions/classes).
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox"> There is no code duplication. Functionality that already exist is being reused.
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox"> Each of the functions/methods have a clear and single responsibility.
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox"> Comments are properly utilized, and redundant/outdated comments are removed.
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox"> Commented-out code or dead code is removed.
-            </label>
-        </li>
-        <li>
-            <label>
-                <input type="checkbox"> Code is tested to make sure it works as expected.
-            </label>
-        </li>
-    </ul>
+
+    <div class="horizontal-line"></div>
+
+    <div id="checklist-container">
+        <!-- <h3>Checklist</h3> -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <span id="progress-text">0% Complete</span>
+            <button id="reset-button">Reset</button>
+        </div>
+        <ul id="checklist"></ul>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
