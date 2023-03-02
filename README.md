@@ -5,7 +5,7 @@ Checklist that can be used during a code review.
 ## Overview
 * The app can be viewed at: https://ahasan-suncor.github.io/CodeChecklist/
 
-![image](https://user-images.githubusercontent.com/84206795/221395147-b63c1de2-4436-4c89-926b-596e16fad5f0.png)
+![image](https://user-images.githubusercontent.com/84206795/222586830-87bc3c39-b3a1-4ab0-9959-91f44ca161d1.png)
 
 ## How to Run Locally
 To run this code, you need a local HTTP server. You can use Node.js and the http-server package. Here are the steps to clone the repo, install and run http-server:
