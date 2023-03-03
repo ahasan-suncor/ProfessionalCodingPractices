@@ -6,7 +6,7 @@
              This is so the correct list can be displayed based on what's selected.
  */
 
-const categoryFilters = document.querySelectorAll('.filter');
+const categoryCheckboxes = document.querySelectorAll('.filter');
 const checklistContainer = document.getElementById('checklist-container');
 const checklist = document.getElementById('checklist');
 const progressBar = document.querySelector('.progress');
@@ -14,7 +14,7 @@ const progressText = document.querySelector('#progress-text');
 const resetButton = document.querySelector('#reset-button');
 
 // Remember the checklist items that have been checked.
-let checkedItems = {};
+let completedItems = {};
 
 let checklistCategoryItems = {};
 
@@ -32,7 +32,7 @@ async function loadChecklistCategoryItems() {
 }
 
 function clearCheckedItems() {
-    checkedItems = {};
+    completedItems = {};
 }
 
 function clearProgressText() {
@@ -40,44 +40,46 @@ function clearProgressText() {
 }
 
 // Updates the UI with the latest selected category checklist.
-function createChecklistOnPage() {
+function renderChecklist() {
     const selectedCategories = getSelectedCategories();
 
     if (selectedCategories.length === 0) {
-        clearCheckedItems();
-        clearProgressText();
-        checklistContainer.style.display = 'none';
-        checklist.innerHTML = '';
+        clearUI();
         return;
     }
 
+    // Remove the checklist items from categories not selected and display the new list.
     clearUnselectedCategoryChecklist(selectedCategories);
-
     checklist.innerHTML = generateChecklistItems(selectedCategories);
     checklistContainer.style.display = 'block';
-
-    updateChecklistProgressOnPage();
+    updateChecklistCompletionStatus();
 }
 
 // Retrieves all selected category filters from the UI and returns them as an array.
 function getSelectedCategories() {
     const selectedCategories = [];
-    categoryFilters.forEach(checkbox => {
+    categoryCheckboxes.forEach(checkbox => {
         if (checkbox.checked) {
             selectedCategories.push(checkbox.id);
         }
     });
     return selectedCategories;
 }
+function clearUI() {
+    clearCheckedItems();
+    clearProgressText();
+    checklistContainer.style.display = 'none';
+    checklist.innerHTML = '';
+}
 
 // For every category filter, if it's not selected, and it had items checked in its list, then clear it.
 function clearUnselectedCategoryChecklist(selectedCategories) {
-    for (const categoryFilterName in checklistCategoryItems) {
-        const categoryChecklist = checklistCategoryItems[categoryFilterName];
-        if (!selectedCategories.includes(categoryFilterName)) {
+    for (const category in checklistCategoryItems) {
+        const categoryChecklist = checklistCategoryItems[category];
+        if (!selectedCategories.includes(category)) {
             categoryChecklist.forEach(item => {
-                if (checkedItems[categoryFilterName] && checkedItems[categoryFilterName].includes(item)) {
-                    updateCheckedItem(categoryFilterName, item);
+                if (completedItems[category] && completedItems[category].includes(item)) {
+                    updateCheckedItem(category, item);
                 }
             });
         }
@@ -98,9 +100,9 @@ function generateChecklistItems(selectedCategories) {
 
 // Helper function to create the HTML for the checklist.
 function generateChecklistItemHTML(categoryChecklist, categoryName) {
-    let checklistItems = '';
+    let checklistHTML = '';
     categoryChecklist.forEach(item => {
-        const isItemChecked = checkedItems[categoryName] && checkedItems[categoryName].includes(item);
+        const isItemChecked = completedItems[categoryName] && completedItems[categoryName].includes(item);
         const itemClass = isItemChecked ? 'completed' : '';
         const itemAttribute = isItemChecked ? 'checked' : '';
 
@@ -108,7 +110,7 @@ function generateChecklistItemHTML(categoryChecklist, categoryName) {
                                      <label>
                                         <input type="checkbox" ${itemAttribute}
                                           onchange="updateCheckedItem('${categoryName}', '${item}'); 
-                                                    updateChecklistProgressOnPage();
+                                                    updateChecklistCompletionStatus();
                                                     updateChecklistItemsStyle(this);
                                                     ">
                                          ${item}
@@ -116,14 +118,14 @@ function generateChecklistItemHTML(categoryChecklist, categoryName) {
                                  </li>
                                 `;
 
-        checklistItems += checklistItemHTML;
+        checklistHTML += checklistItemHTML;
     });
-    return checklistItems;
+    return checklistHTML;
 }
 
 // Called whenever a checklist checkbox is clicked: either persists the checked item's state or removes it.
 function updateCheckedItem(categoryName, checklistItem) {
-    const categoryItemsChecked = checkedItems[categoryName] || [];
+    const categoryItemsChecked = completedItems[categoryName] || [];
     const itemIndex = categoryItemsChecked.indexOf(checklistItem);
     const itemExists = itemIndex !== -1;
 
@@ -133,22 +135,25 @@ function updateCheckedItem(categoryName, checklistItem) {
         categoryItemsChecked.push(checklistItem);
     }
 
-    checkedItems[categoryName] = categoryItemsChecked;
+    completedItems[categoryName] = categoryItemsChecked;
 }
 
 // Updates the progress bar and progress text based on the current state of the items.
-function updateChecklistProgressOnPage() {
-    const filters = getSelectedCategories();
+function updateChecklistCompletionStatus() {
+    const selectedCategories = getSelectedCategories();
     let totalNumOfChecklistItems = 0;
     let numOfCompletedItems = 0;
+    let percentComplete = 0;
 
-    for (const filter of filters) {
-        if (checklistCategoryItems[filter]) {
-            totalNumOfChecklistItems += checklistCategoryItems[filter].length;
-            numOfCompletedItems += checkedItems[filter] ? checkedItems[filter].length : 0;
+    for (const category of selectedCategories) {
+        if (checklistCategoryItems[category]) {
+            totalNumOfChecklistItems += checklistCategoryItems[category].length;
+            numOfCompletedItems += completedItems[category] ? completedItems[category].length : 0;
         }
     }
-    const percentComplete = Math.round((numOfCompletedItems / totalNumOfChecklistItems) * 100);
+    if (totalNumOfChecklistItems > 0) {
+        percentComplete = Math.round((numOfCompletedItems / totalNumOfChecklistItems) * 100);
+    }
     progressBar.style.width = percentComplete + '%';
     progressText.innerText = percentComplete + '% Complete';
 }
@@ -168,21 +173,21 @@ function addResetButtonEventListener() {
     resetButton.addEventListener('click', function () {
         clearCheckedItems();
         clearProgressText();
-        createChecklistOnPage();
+        renderChecklist();
     });
 }
 
 // Add an event listener to add the checklist for the category selected.
-function addCategoryFiltersEventListener() {
-    categoryFilters.forEach(checkbox => {
-        checkbox.addEventListener('change', createChecklistOnPage);
+function addCategoryFilterEventListener() {
+    categoryCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', renderChecklist);
     });
 }
 
 function initializeApp() {
-    addCategoryFiltersEventListener();
+    addCategoryFilterEventListener();
     addResetButtonEventListener();
-    createChecklistOnPage();
+    renderChecklist();
 }
 
 // The program waits till the list is loaded before initializing the app.
