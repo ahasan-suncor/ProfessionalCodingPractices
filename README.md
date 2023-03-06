@@ -1,5 +1,5 @@
 <h1 align="center">Professional Coding Practices</h1>
-<h2 align="center"><a href="https://ahasan-suncor.github.io/CodeChecklist/">View Live</a></h2>
+<h2 align="center"><a href="https://ahasan-suncor.github.io/ProfessionalCodingPractices/">View Live</a></h2>
 
 <div align="center">
 
