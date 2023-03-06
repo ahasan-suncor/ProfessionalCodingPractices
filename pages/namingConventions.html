@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <title>Professional Coding Practices</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="./overview.html">Overview</a></li>
+      <li><a href="./checklist.html">Code Review Checklist</a></li>
+      <li><a href="./namingConventions.html" class="active-nav-link">Naming Conventions</a></li>
+      <li><a href="./functions.html">Functions</a></li>
+      <li><a href="./codeFormattingAndStyle.html">Code Formatting & Style</a></li>
+      <li><a href="./documentation.html">Documentation & Code Comments</a></li>
+      <li><a href="./testing.html">Testing & Logging</a></li>
+      <li><a href="./acknowledgements.html">Acknowledgements</a></li>
+      <li><a href="./glossary.html">Glossary</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section id="naming">
+      <h1>Naming Conventions</h1>
+      <p>Applies to variable names, column names, function names, class names, common table expressions, aliases, file
+        names, etc.
+        This is a generic list of naming conventions that applies to any programming languages used in the AA team (SQL,
+        R, Python, etc.).
+      <p>
+      <ul>
+        <li>Names should be descriptive, specific, and meaningful to get the intention/idea across to the reader. The
+          name should answer some questions like what it does, and how it is used</li>
+        <li>Add suffixes or prefixes to make the name more understandable, avoid confusion and ambiguity
+          <ul>
+            <li>Ex. Add a unit of measurement: TruckSpeed_kmh</li>
+            <li>Ex. CreatedDateTime_utc</li>
+            <li>Ex. Do not name a variable "df" instead suffix/prefix it with "spark_df" for a Spark DataFrame or
+              "pandas_df" for a Pandas DataFrame</li>
+          </ul>
+        </li>
+        <li>The name cannot consist solely of reserved keywords from the language
+          <ul>
+            <li>This includes datatypes like "Date"</li>
+          </ul>
+        </li>
+        <li>Avoid being too generic with the name and quantify it with an adjective to be more specific and give it
+          context
+          <ul>
+            <li>Ex. WorkOrderDate</li>
+          </ul>
+        </li>
+        <li>Function name should be a verb that describes what the function will do
+          <ul>
+            <li>Ex. getShiftIdFromTimestamp</li>
+          </ul>
+        </li>
+        <li>Only use abbreviations if someone inexperienced would understand it too without additional help (like a
+          comment
+          explaining what it is). If you want, you can include abbreviations for experienced users separately
+          <ul>
+            <li>Ex. Instead of "GOH", use "GrossOperatingHours_GOH"</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </main>
+</body>
+
+</html>

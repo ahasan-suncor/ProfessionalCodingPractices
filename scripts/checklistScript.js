@@ -1,6 +1,6 @@
 /* Created by: Ahmed
  * Created: Wed Feb 15 2023 
- * Description: Update the web page based on the checklist and categories selected.
+ * Description: Update the checklist page based on the categories selected.
  * Notes: 0. I am amazing annnnd hakuna matata!
           1. The key in checklistCategoryItems JSON needs to match the checkbox element ID tag in the HTML.
              This is so the correct list can be displayed based on what's selected.
@@ -12,6 +12,7 @@ const checklist = document.getElementById('checklist');
 const progressBar = document.querySelector('.progress');
 const progressText = document.querySelector('#progress-text');
 const resetButton = document.querySelector('#reset-button');
+const checklistDataPath = '../data/checklistItems.json';
 
 // Remember the checklist items that have been checked.
 let completedItems = {};
@@ -22,7 +23,7 @@ let checklistCategoryItems = {};
 // This is to ensure the data is fully loaded before executing the rest of the code.
 async function loadChecklistCategoryItems() {
     try {
-        const response = await fetch('checkListItems.json');
+        const response = await fetch(checklistDataPath);
         const data = await response.json();
         checklistCategoryItems = data;
         return data;

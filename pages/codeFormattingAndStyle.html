@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <title>Professional Coding Practices</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="./overview.html">Overview</a></li>
+      <li><a href="./checklist.html">Code Review Checklist</a></li>
+      <li><a href="./namingConventions.html">Naming Conventions</a></li>
+      <li><a href="./functions.html">Functions</a></li>
+      <li><a href="./codeFormattingAndStyle.html" class="active-nav-link">Code Formatting & Style</a></li>
+      <li><a href="./documentation.html">Documentation & Code Comments</a></li>
+      <li><a href="./testing.html">Testing & Logging</a></li>
+      <li><a href="./acknowledgements.html">Acknowledgements</a></li>
+      <li><a href="./glossary.html">Glossary</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section id="formatting">
+      <h1>Code Formatting & Style</h1>
+      <ul>
+        <li>Be consistent throughout the project
+          <ul>
+            <li>Ex. Names: Eqmt vs. Equipment</li>
+            <li>Ex. Writing style: snake_case, camelCase, PascalCase, etc.</li>
+          </ul>
+        </li>
+        <li>Do not intermingle constants in an expression, and avoid hard coding values
+          <ul>
+            <li>Ex. Do not do x = ten + 5, instead define what 5 is</li>
+            <li>Ex. x = 10 + 5 is fine if constants are not mixed with other variables</li>
+          </ul>
+        </li>
+        <li>Parameterization - values should go into a variable (even if it is not used multiple times). This way,
+          changes to the value only need to be changed in one place. Ideally this variable should be placed at the top
+          of the code or someplace easily accessible, so someone does not have to go hunting through the code just to
+          find it</li>
+        <li>Use whitespace and indentation to make code look neat and organized
+          <ul>
+            <li>Ex. x + y, func(a, b, c)</li>
+            <li>Consider putting each list item on its own line if it gets too wide (in function calls, lists, json,
+              etc.)</li>
+          </ul>
+        </li>
+        <li>Never mix spaces and tabs
+          <ul>
+            <li>Use automated tools to ensure consistent formatting with multiple developers</li>
+          </ul>
+          <ul>
+            <li>It also makes the function harder to read and probably means the function is doing more than one task
+            </li>
+          </ul>
+          <ul>
+            <li>If you have multiple arguments, you can pass them as one object by using a dictionary or use default
+              values</li>
+          </ul>
+        </li>
+        <li>Avoid excessive nesting of code blocks to ensure readability and maintainability</li>
+        <li>Extract complex boolean expressions into variables. The variable name will then describe what the chunk of
+          code is doing. This helps understand the code when you break it up into intermediate parts</li>
+      </ul>
+    </section>
+  </main>
+</body>
+
+</html>

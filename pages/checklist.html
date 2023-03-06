@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Review Checklist</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/checklistStyle.css">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="./overview.html">Overview</a></li>
+            <li><a href="./checklist.html" class="active-nav-link">Code Review Checklist</a></li>
+            <li><a href="./namingConventions.html">Naming Conventions</a></li>
+            <li><a href="./functions.html">Functions</a></li>
+            <li><a href="./codeFormattingAndStyle.html">Code Formatting & Style</a></li>
+            <li><a href="./documentation.html">Documentation & Code Comments</a></li>
+            <li><a href="./testing.html">Testing & Logging</a></li>
+            <li><a href="./acknowledgements.html">Acknowledgements</a></li>
+            <li><a href="./glossary.html">Glossary</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h3>Choose categories you want to see:</h3>
+        <div id="filter-container">
+            <label><input checked type="checkbox" class="filter" id="clean-code">Clean & Readable Code</label>
+        </div>
+
+        <div class="horizontal-line"></div>
+
+        <div id="checklist-container">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <span id="progress-text">0% Complete</span>
+                <button id="reset-button">Reset</button>
+            </div>
+            <ul id="checklist"></ul>
+        </div>
+    </main>
+    <script src="../scripts/checklistScript.js"></script>
+</body>
+
+</html>
