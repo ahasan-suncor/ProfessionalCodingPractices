@@ -38,7 +38,7 @@ It also includes a checklist that can be used during a code review to ensure tha
 │   ├── testing.html
 │   ├── acknowledgements.html
 │   └── glossary.html
-├── index.html - Redirects to main site. Needed when for GitHub pages
+├── index.html - Redirects to main site. Needed for GitHub pages
 └── README.md
 ```
 
