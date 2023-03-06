@@ -1,5 +1,5 @@
 <h1 align="center">Professional Coding Practices</h1>
-<h2 align="center"><a href="https://ahasan-suncor.github.io/CodeChecklist/">View Live Demo</a></h2>
+<h2 align="center"><a href="https://ahasan-suncor.github.io/ProfessionalCodingPractices/">View Live</a></h2>
 
 <div align="center">
 
@@ -15,7 +15,7 @@ This guide is intended for developers to help write readable, and maintainable c
 The website includes naming conventions, code formatting, and documentation standards.
 It also includes a checklist that can be used during a code review to ensure that all coding practices are followed.
 
-<p align="center"><img  src="https://user-images.githubusercontent.com/84206795/222586830-87bc3c39-b3a1-4ab0-9959-91f44ca161d1.png" width="900%"></p>
+<p align="center"><img  src="https://user-images.githubusercontent.com/84206795/223031233-eaf4003e-8313-4fd7-b9ec-d8975fd438a5.gif" width="60%"></p>
 
 ---
 ## Folder Structure
@@ -38,6 +38,7 @@ It also includes a checklist that can be used during a code review to ensure tha
 │   ├── testing.html
 │   ├── acknowledgements.html
 │   └── glossary.html
+├── index.html - Redirects to main site. Needed for GitHub pages
 └── README.md
 ```
 
