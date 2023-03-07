@@ -3,19 +3,19 @@
 
 <div align="center">
 
-[Overview](#overview) • 
-[Folder Structure](#folder-structure) • 
-[How to Run Locally](#how-to-run-locally) • 
+[Overview](#overview) |
+[Folder Structure](#folder-structure) |
+[How to Run Locally](#how-to-run-locally) |
 [Contribute](#contribute)
 </div>
 
 ---
 ## Overview
 This guide is intended for developers to help write readable, and maintainable code.
-The website includes naming conventions, code formatting, and documentation standards.
+It includes things like naming conventions, code formatting, and documentation standards.
 It also includes a checklist that can be used during a code review to ensure that all coding practices are followed.
 
-<p align="center"><img  src="https://user-images.githubusercontent.com/84206795/223031233-eaf4003e-8313-4fd7-b9ec-d8975fd438a5.gif" width="65%"></p>
+<p align="center"><img  src="https://user-images.githubusercontent.com/84206795/223031233-eaf4003e-8313-4fd7-b9ec-d8975fd438a5.gif" width="70%"></p>
 
 ---
 ## Folder Structure
@@ -28,7 +28,7 @@ It also includes a checklist that can be used during a code review to ensure tha
 ├── data/
 │   └── checklistItems.json - Checklist data
 ├── images/
-├── pages/
+├── pages/ - Different pages for the section of the coding standards document
 │   ├── overview.html
 │   ├── checklist.html
 │   ├── namingConventions.html
