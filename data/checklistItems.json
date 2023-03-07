@@ -11,7 +11,7 @@
         "Each of the functions/methods have a clear and single responsibility.",
         "Each function/method contains a docstring that highlights the use with required inputs and outputs.",
         "Comments are properly utilized, and redundant/outdated comments are removed.",
-        "Commented-out code or dead code is removed.",
+        "Unused or unnecessary code, including commented-out code, dead code and print statements, is removed.",
         "Code is tested to make sure it works as expected."
     ],
     "filter3": [

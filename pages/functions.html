@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <title>Professional Coding Practices</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="./overview.html">Overview</a></li>
+      <li><a href="./checklist.html">Code Review Checklist</a></li>
+      <li><a href="./namingConventions.html">Naming Conventions</a></li>
+      <li><a href="./functions.html" class="active-nav-link">Functions</a></li>
+      <li><a href="./codeFormattingAndStyle.html">Code Formatting & Style</a></li>
+      <li><a href="./documentation.html">Documentation & Code Comments</a></li>
+      <li><a href="./testing.html">Testing & Logging</a></li>
+      <li><a href="./acknowledgements.html">Acknowledgements</a></li>
+      <li><a href="./glossary.html">Glossary</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section id="functions">
+      <h1>Functions</h1>
+      <p>This applies mostly to programming languages like Python or R. Not all of this is applicable for queries using
+        SQL.
+      <p>
+      <ul>
+        <li>Code should follow a modular structure, and break large chunks of code into smaller self-contained and
+          understandable logical components (functions)
+          <ul>
+            <li>Makes code easy to understand, and reuse. It also makes it easier to modify or extend the code as there
+              are separate functions</li>
+          </ul>
+        </li>
+        <li>Functions should be concise</li>
+        <li>Frequently duplicated code should go into a function to be reused</li>
+        <li>A function should have a clear purpose and not do more than one task
+          <ul>
+            <li>A function should do what it says it will do and not anything else</li>
+            <li>Break up the function into smaller functions if needed</li>
+            <li>Ex. A function that loads data should just load data and not filter or select columns as well</li>
+          </ul>
+        </li>
+        <li>Number of parameters to a function should be as few as possible
+          <ul>
+            <li>The more input parameters to a function, the harder it is to remember the order to pass arguments in
+              when calling the function. You must look up the function definition which is an unnecessary distraction
+              and breaks your flow</li>
+            <li>It also makes the function harder to read and probably means the function is doing more than one task
+            </li>
+            <li>If you have multiple arguments, you can pass them as one object by using a dictionary or use default
+              values <br>
+              <img src="../images/FunctionParamObject.png" alt="Function with parameter object example" width="50%">
+              <img src="../images/FunctionDefaultParams.png" alt="Function with default parameters example" width="50%">
+            </li>
+          </ul>
+        </li>
+        <li>Reusable functions that are shared by multiple developers should go into a separate file/folder inside the
+          project folder
+          <ul>
+            <li>Ex. Creating a "utils" folder</li>
+          </ul>
+        </li>
+        <li>Use abstraction to hide implementation details and show a high-level view to the reader. If someone wants to
+          get more details, they can dive deeper into the functions <br>
+          <img src="../images/Abstraction.png" alt="Abstraction example" width="50%">
+        </li>
+        <li>Organize your functions to have a natural flow. Functions that go together should be close to each other
+        </li>
+        <li>Sort functions in the order in which they are called
+          <ul>
+            <li>This can make the code easier to read and follow</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </main>
+</body>
+
+</html>

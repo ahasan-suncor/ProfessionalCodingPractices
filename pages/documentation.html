@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <title>Professional Coding Practices</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="./overview.html">Overview</a></li>
+      <li><a href="./checklist.html">Code Review Checklist</a></li>
+      <li><a href="./namingConventions.html">Naming Conventions</a></li>
+      <li><a href="./functions.html">Functions</a></li>
+      <li><a href="./codeFormattingAndStyle.html">Code Formatting & Style</a></li>
+      <li><a href="./documentation.html" class="active-nav-link">Documentation & Code Comments</a></li>
+      <li><a href="./testing.html">Testing & Logging</a></li>
+      <li><a href="./acknowledgements.html">Acknowledgements</a></li>
+      <li><a href="./glossary.html">Glossary</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section id="documentation">
+      <h1>Documentation & Code Comments</h1>
+      <p>Comments and docstrings serve different purposes and provide different types of information to different
+        audiences.</p>
+      <ul>
+        <li>Document business logic</li>
+        <li>Comments should not duplicate the code. Not every line needs to be commented. "Code Tells You How, Comments
+          Tell You Why."
+          <ul>
+            <li>Ex. If your code filters for certain equipment in the data, add a comment explaining why</li>
+          </ul>
+        </li>
+        <li>Do not comment to explain a piece of code to someone not familiar with the language. That is on the reader
+          to look it up and learn
+          <ul>
+            <li>An exception is, you can comment something like a complex regular expression because not everyone is a
+              regex wizard. But first think about giving a proper name to the regex instead of commenting and comment
+              only if necessary</li>
+            <li>Another exception can be made if the language used to write the code is obtuse to everyone else on the
+              team</li>
+          </ul>
+        </li>
+        <li>Comment non-obvious code like performance optimizations, or some hack, etc.</li>
+        <li>Comment to reveal additional information such as complex logic, assumptions, warnings, etc.</li>
+        <li>Comments are recommended, but should be used with good judgement. A good, descriptive name for a variable,
+          function or method can often obviate the need for an inline comment
+        </li>
+      </ul>
+    </section>
+  </main>
+</body>
+
+</html>

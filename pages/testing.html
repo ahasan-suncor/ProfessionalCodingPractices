@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <title>Professional Coding Practices</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="./overview.html">Overview</a></li>
+      <li><a href="./checklist.html">Code Review Checklist</a></li>
+      <li><a href="./namingConventions.html">Naming Conventions</a></li>
+      <li><a href="./functions.html">Functions</a></li>
+      <li><a href="./codeFormattingAndStyle.html">Code Formatting & Style</a></li>
+      <li><a href="./documentation.html">Documentation & Code Comments</a></li>
+      <li><a href="./testing.html" class="active-nav-link">Testing & Logging</a></li>
+      <li><a href="./acknowledgements.html">Acknowledgements</a></li>
+      <li><a href="./glossary.html">Glossary</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section id="testing">
+      <h1>Testing & Logging</h1>
+      <ul>
+        <li>Tests should be run to check the actual output versus the expected output
+          <ul>
+            <li>The code does what it is designed to do and all tests pass</li>
+          </ul>
+        </li>
+        <li>Logging can be used to trace back errors when running a workflow. It provides messages that help with:
+          <ul>
+            <li>Understanding the flow of a program</li>
+            <li>Store information or provide more insights than a trace about an error</li>
+            <li>Log messages provide developers with an extra pair of eyes that constantly look at the flow of an
+              application</li>
+          </ul>
+        </li>
+        <li>Remove print statements from your code before deploying it to production
+          <ul>
+            <li>Ex. print(), display(), head(), etc.</li>
+            <li>They can impact performance and create noise and visual clutter</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </main>
+</body>
+
+</html>
